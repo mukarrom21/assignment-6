@@ -1,4 +1,4 @@
-// search button onclick function
+// search button and find images
 const dataLoad = () => {
   // get input field
   const input = document.getElementById("input");
@@ -7,14 +7,21 @@ const dataLoad = () => {
     .then((res) => res.json())
     .then((data) => displayData(data.data));
 };
-
+// search button and find information
+const infoLoad = (id) => {};
 // display data in new function
 const displayData = (items) => {
   // get div with id for loading data in this div
-  const dataLoadField = document.getElementById("load-load-field");
+  const dataLoadField = document.getElementById("data-load-field");
   //Loop data
   items.forEach((item) => {
-    console.log(item);
+    // get api
+    fetch(`https://openapi.programming-hero.com/api/phone/${item.slug}`)
+      .then((res) => res.json())
+      .then((data) => {
+        const phoneId = data.data;
+        console.log(phoneId);
+      });
     //creat new div
     const div = document.createElement("div");
     div.className = "col";
@@ -29,8 +36,8 @@ const displayData = (items) => {
                     lead-in to
                     additional content. This content is a little bit longer.</p>
             </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
+            <div class="d-grid gap-2">
+              <button class="btn btn-outline-primary" type="button">See Details</button>
             </div>
         </div>
 `;
