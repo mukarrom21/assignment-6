@@ -26,12 +26,40 @@ const displayData = (items) => {
           <h6 class="card-title">Brand: ${item.brand}</h6>
         </div>
         <div class="d-grid gap-2">
-            <button class="btn btn-outline-primary" type="button">See Details</button>
+            <button class="btn btn-outline-primary" type="button" onclick="getDetails('${item.slug}')">See Details</button>
         </div>
       </div>
     `;
     dataLoadField.appendChild(div);
   });
+};
+
+// Details field
+const getDetails = (id) => {
+  fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
+    .then((res) => res.json())
+    .then((data) => displayDetails(data.data));
+};
+
+// display details
+const displayDetails = (info) => {
+  console.log(info);
+  const detailsField = document.getElementById("details-field");
+  const div = document.createElement("div");
+  div.className = "w-50 mx-auto";
+  // div inner html set
+  div.innerHTML = `
+    <div class="card h-100">
+      <img src="${info.image}" class="card-img-top img-fluid">
+      <div class="card-body text-center">
+        <h5 class="card-title">${info.name}</h5>
+        <h6 class="card-title">Brand: ${info.brand}</h6>
+        <p class="">Release Date: ${info.releaseDate || 'sorry'} </p>
+      </div>
+    </div>
+  `;
+  detailsField.appendChild(div);
+  
 };
 
 /*
