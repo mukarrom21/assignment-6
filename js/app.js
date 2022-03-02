@@ -64,6 +64,7 @@ const getDetails = (id) => {
 
 // display details
 const displayDetails = (info) => {
+  window.scrollTo(0, 0);
   console.log(info);
   const detailsField = document.getElementById("details-field");
   const div = document.createElement("div");
