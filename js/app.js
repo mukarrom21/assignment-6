@@ -30,8 +30,6 @@ const displayData = (items) => {
   //Loop data
   const item20 = items.slice(0, 20);
   item20.forEach((item) => {
-    // const a = item.slice(0, 20);
-
     //creat new div
     const div = document.createElement("div");
     div.className = "col";
@@ -64,16 +62,17 @@ const getDetails = (id) => {
 
 // display details
 const displayDetails = (info) => {
+  // scroll to details
   window.scrollTo(0, 0);
-  console.log(info);
+  // Loop in sensor data
   let sensors = [];
   info.mainFeatures.sensors.forEach((sensor) => {
     sensors.push(" " + sensor);
   });
-  console.log(sensors);
+  //get details field html div
   const detailsField = document.getElementById("details-field");
+  // create new div
   const div = document.createElement("div");
-  div.className = "";
   // div inner html set
   div.innerHTML = `
     <div class="maxw mx-auto">
