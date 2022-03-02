@@ -17,7 +17,7 @@ const displayData = (items) => {
   const typeOfsearch = items[0];
   if (typeOfsearch == undefined) {
     document.getElementById("details-field").innerHTML = `
-    <div class="text-center alert alert-warning alert-dismissible fade show" role="alert">
+    <div class="text-center alert alert-warning bg-danger text-light alert-dismissible fade show" role="alert">
     Sorry! no phone was found with <strong>${input.value || "no"}</strong> name.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
@@ -37,14 +37,14 @@ const displayData = (items) => {
     div.className = "col";
     // div inner html set
     div.innerHTML = `
-      <div class="card h-100 card-width">
+      <div class="card border-0 h-100 card-width shadow">
         <img src="${item.image}" class="card-img-top mx-auto" alt="${item.slug}">
         <div class="card-body text-center">
           <h5 class="card-title">${item.phone_name}</h5>
           <h6 class="card-title">Brand: ${item.brand}</h6>
         </div>
         <div class="d-grid gap-2">
-            <button class="btn btn-outline-primary mx-auto" type="button" onclick="getDetails('${item.slug}')">See Details</button>
+            <button class="btn btn-outline-success w-75 mx-auto border-0 shadow mb-2" type="button" onclick="getDetails('${item.slug}')">See Details</button>
         </div>
       </div>
     `;
@@ -80,7 +80,7 @@ const displayDetails = (info) => {
       <img src="${info.image}" alt="" class="w-100">
     </div>
     <div class="card-body text-center">
-      <h2 class="card-title text-success">${info.name}</h2>
+      <h2 class="card-title text-danger">${info.name}</h2>
     </div>
     
     <table class="table table-bordered table-hover">
@@ -124,8 +124,8 @@ const displayDetails = (info) => {
             }</td>
         </tr>
         
-        <tr>
-            <th colspan="2" class="col-4" class="text-center text-info">Others</th>
+        <tr class="text-center text-light bg-dark">
+            <th colspan="2" class="col-4">Others</th>
         </tr>
         <tr>
             <th class="col-4">WLAN</th>
@@ -163,148 +163,3 @@ const displayDetails = (info) => {
   `;
   detailsField.appendChild(div);
 };
-
-/*
-
- <div class="card border-0">
-      <img src="${info.image}" class="mx-auto" width="300">
-      <div class="card-body text-center">
-          <h2 class="card-title text-center text-success">${info.name}</h2>
-      </div>
-      <table class="table table-bordered table-hover">
-          <tbody>
-              <tr>
-                  <th class="col-4">First Release</th>
-                  <td>${
-                    info.releaseDate || "Sorry, Release date not found!"
-                  }</td>
-              </tr>
-              <tr>
-                  <th class="col-4">Brand</th>
-                  <td>${info.brand || "Sorry, Release date not found!"}</td>
-              </tr>
-              <tr>
-                  <th class="col-4">Storage</th>
-                  <td>${
-                    info.storage || "Sorry, Storage information not found!"
-                  }</td>
-              </tr>
-              <tr>
-                  <th class="col-4">Chipset</th>
-                  <td>${
-                    info.mainFeatures.chipSet ||
-                    "Sorry, chipset information not found!"
-                  }</td>
-              </tr>
-              <tr>
-                  <th class="col-4">Memory</th>
-                  <td>${
-                    info.mainFeatures.memory ||
-                    "Sorry, memory information not found!"
-                  }</td>
-              </tr>
-              <tr>
-                  <th class="col-4">Display Size</th>
-                  <td>${
-                    info.mainFeatures.displaySize ||
-                    "Sorry, display Size information not found!"
-                  }</td>
-              </tr>
-              <tr class="overflow-auto">
-                  <th class="col-4">Sensors</th>
-                  <td id='sens'>${
-                    info.mainFeatures.sensors ||
-                    "Sorry, sensors information not found!"
-                  }</td>
-              </tr>
-              
-              <tr>
-                  <th colspan="2" class="col-4" class="text-center text-info">Others</th>
-              </tr>
-              <tr>
-                  <th class="col-4">WLAN</th>
-                  <td>${
-                    info?.others?.WLAN || "Sorry, WLAN information not found!"
-                  }</td>
-              </tr>
-              <tr>
-                  <th class="col-4">Bluetooth</th>
-                  <td>${
-                    info?.others?.Bluetooth ||
-                    "Sorry, Bluetooth information not found!"
-                  }</td>
-              </tr>
-              <tr>
-                  <th class="col-4">GPS</th>
-                  <td>${
-                    info?.others?.GPS || "Sorry, GPS information not found!"
-                  }</td>
-              </tr>
-              <tr>
-                  <th class="col-4">NFC</th>
-                  <td>${
-                    info?.others?.NFC || "Sorry, NFC information not found!"
-                  }</td>
-              </tr>
-              <tr>
-                  <th class="col-4">Radio</th>
-                  <td>${
-                    info?.others?.Radio || "Sorry, Radio information not found!"
-                  }</td>
-              </tr>
-              <tr>
-                  <th class="col-4">USB</th>
-                  <td>${
-                    info?.others?.USB || "Sorry, USB information not found!"
-                  }</td>
-              </tr>
-          </tbody>
-      </table>
-    </div>
-    */
-/*
-<div class="maxw mx-auto">
-                <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-ipad-mini-2021.jpg" alt="" class="w-100">
-            </div>
-    <table class="table table-bordered table-hover">
-      <tr>
-        <th class="col-4">First Release</th>
-        <td class="col-8">${
-          info.releaseDate || "Sorry, Release date not found!"
-        }</td>
-      </tr>
-      <tr>
-      
-        <td class="col-4">Brand</td>
-        <td class="col-8">${info.brand || "Sorry, Release date not found!"}</td>
-      </tr>
-      <tr>
-        <td class="col-4">Storage</td>
-        <td class="col-8">${
-          info.storage || "Sorry, Release date not found!"
-        }</td>
-      </tr>
-      <tr>
-        <td class="col-4">Chipset</td>
-        <td class="col-8">${
-          info.mainFeatures.chipSet || "Sorry, Release date not found!"
-        }</td>
-      </tr>
-      <tr>
-        <td class="col-4">Memory</td>
-        <td class="col-8">${
-          info.mainFeatures.memory || "Sorry, Release date not found!"
-        }</td>
-      </tr>
-      <tr>
-        <td class="col-4">Display Size</td>
-        <td class="col-8">${
-          info.mainFeatures.displaySize || "Sorry, Release date not found!"
-        }</td>
-      </tr>
-      <tr>
-        <td class="col-4">Sensors</td>
-        <td class="col-8">${sensors || "Sorry, Release date not found!"}</td>
-      </tr>
-    </table>
-*/
