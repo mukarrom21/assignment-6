@@ -1,5 +1,8 @@
 // search button and find images
 const dataLoad = () => {
+  // clear previous data
+  document.getElementById("data-load-field").innerHTML = "";
+  document.getElementById("details-field").innerHTML = "";
   // get input field
   const input = document.getElementById("input");
   // get api
@@ -10,6 +13,8 @@ const dataLoad = () => {
 
 // displayData
 const displayData = (items) => {
+  //Clear input value
+  input.value = "";
   // get div with id for loading data in this div
   const dataLoadField = document.getElementById("data-load-field");
   //Loop data
@@ -36,6 +41,10 @@ const displayData = (items) => {
 
 // Details field
 const getDetails = (id) => {
+  // clear previous data
+  document.getElementById("data-load-field").innerHTML = "";
+  document.getElementById("details-field").innerHTML = "";
+
   fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
     .then((res) => res.json())
     .then((data) => displayDetails(data.data));
@@ -54,10 +63,11 @@ const displayDetails = (info) => {
       <div class="card-body text-center">
         <h5 class="card-title">${info.name}</h5>
         <h6 class="card-title">Brand: ${info.brand}</h6>
-        <p class="text-info">Release Date: ${info.releaseDate || 'Sorry, Release date not found!'} </p>
+        <p class="text-info">Release Date: ${
+          info.releaseDate || "Sorry, Release date not found!"
+        } </p>
       </div>
     </div>
   `;
   detailsField.appendChild(div);
-  
 };
