@@ -18,7 +18,7 @@ const displayData = (items) => {
   if (typeOfsearch == undefined) {
     document.getElementById("details-field").innerHTML = `
     <div class="text-center alert alert-warning alert-dismissible fade show" role="alert">
-      Sorry! <strong>${input.value}</strong> is not found.</br> You can search like: apple,iphone,samsung, oppo etc. or any letter includes phone or brand name or model name.
+      Sorry! no phone found with <strong>${input.value}</strong> name.
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     `;
@@ -28,8 +28,10 @@ const displayData = (items) => {
   // get div with id for loading data in this div
   const dataLoadField = document.getElementById("data-load-field");
   //Loop data
-  items.forEach((item) => {
-    console.log(item);
+  const item20 = items.slice(0, 20);
+  item20.forEach((item) => {
+    // const a = item.slice(0, 20);
+
     //creat new div
     const div = document.createElement("div");
     div.className = "col";
@@ -53,7 +55,6 @@ const displayData = (items) => {
 // Details field
 const getDetails = (id) => {
   // clear previous data
-  document.getElementById("data-load-field").innerHTML = "";
   document.getElementById("details-field").innerHTML = "";
 
   fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
@@ -69,68 +70,97 @@ const displayDetails = (info) => {
   div.className = "col-sm-10 col-md-8 col-lg-6 mx-auto";
   // div inner html set
   div.innerHTML = `
-      <div class="card h-100">
+      <div class="card h-100 border-0">
       <img src="${info.image}" class="card-img-top img-fluid">
       <div class="card-body text-center">
           <h2 class="card-title text-success">${info.name}</h2>
-          <h5 class="card-title">Brand: ${info.brand}</h5>
       </div>
       <table class="table table-bordered table-hover">
-          <h3 class="text-center">Vivo Y21T Full Specifications</h3>
           <tbody>
-              
-              <tr class="">
-                  <th class="col-3" scope="row">First Release</th>
-                  <td class="">${
-                      info.releaseDate || "Sorry, Release date not found!"
-                      }</td>
+              <tr>
+                  <th scope="row">First Release</th>
+                  <td>${
+                    info.releaseDate || "Sorry, Release date not found!"
+                  }</td>
+              </tr>
+              <tr>
+                  <th scope="row">Brand</th>
+                  <td>${info.brand || "Sorry, Release date not found!"}</td>
               </tr>
               <tr>
                   <th scope="row">Storage</th>
-                  <td>${info.storage}</td>
+                  <td>${
+                    info.storage || "Sorry, Storage information not found!"
+                  }</td>
               </tr>
               <tr>
                   <th scope="row">Chipset</th>
-                  <td>${info.chipSet}</td>
+                  <td>${
+                    info.mainFeatures.chipSet ||
+                    "Sorry, chipset information not found!"
+                  }</td>
               </tr>
               <tr>
                   <th scope="row">Memory</th>
-                  <td>${info.chipSet}</td>
+                  <td>${
+                    info.mainFeatures.memory ||
+                    "Sorry, memory information not found!"
+                  }</td>
               </tr>
               <tr>
                   <th scope="row">Display Size</th>
-                  <td>${info.chipSet}</td>
+                  <td>${
+                    info.mainFeatures.displaySize ||
+                    "Sorry, display Size information not found!"
+                  }</td>
               </tr>
-              <tr>
+              <tr class="overflow-auto">
                   <th scope="row">Sensors</th>
-                  <td>${info.chipSet}</td>
+                  <td id='sens'>${
+                    info.mainFeatures.sensors ||
+                    "Sorry, sensors information not found!"
+                  }</td>
               </tr>
+              
               <tr>
                   <th colspan="2" scope="row" class="text-center text-info">Others</th>
               </tr>
               <tr>
                   <th scope="row">WLAN</th>
-                  <td>${info.others.WLAN}</td>
+                  <td>${
+                    info?.others?.WLAN || "Sorry, WLAN information not found!"
+                  }</td>
               </tr>
               <tr>
                   <th scope="row">Bluetooth</th>
-                  <td>${info.others.Bluetooth}</td>
+                  <td>${
+                    info?.others?.Bluetooth ||
+                    "Sorry, Bluetooth information not found!"
+                  }</td>
               </tr>
               <tr>
                   <th scope="row">GPS</th>
-                  <td>${info.others.GPS}</td>
+                  <td>${
+                    info?.others?.GPS || "Sorry, GPS information not found!"
+                  }</td>
               </tr>
               <tr>
                   <th scope="row">NFC</th>
-                  <td>${info.others.NFC}</td>
+                  <td>${
+                    info?.others?.NFC || "Sorry, NFC information not found!"
+                  }</td>
               </tr>
               <tr>
                   <th scope="row">Radio</th>
-                  <td>${info.others.Radio}</td>
+                  <td>${
+                    info?.others?.Radio || "Sorry, Radio information not found!"
+                  }</td>
               </tr>
               <tr>
                   <th scope="row">USB</th>
-                  <td>${info.others.USB}</td>
+                  <td>${
+                    info?.others?.USB || "Sorry, USB information not found!"
+                  }</td>
               </tr>
           </tbody>
       </table>
